@@ -25,15 +25,51 @@ type Symptom {
   severity: Float!
 }
 
+type SymptomResult {
+  Symptom: String!
+  Description: String!
+  PossibleConditions: String!
+  Source: String!
+  SourceLink: String
+  SeverityLevel: String!
+  RecommendedAction: String!
+}
+
 type Query {
   severities: [SeverityInfo!]!
   symptoms: [Symptom!]!
   symptomByLevel(severity: Int!): [Symptom!]!
+  findSymptom(symptom: String!, language: String!): SymptomUnion
+  searchSymptoms(query: String!, language: String!): SymptomResult
+}
+
+union SymptomUnion = SymptomVN | SymptomEN
+
+type SymptomVN {
+  symptom: String!
+  description: String!
+  possibleConditions: String!
+  source: String!
+  sourceLink: String
+  severityLevel: String!
+  recommendedAction: String!
+}
+
+type SymptomEN {
+  symptom: String!
+  description: String!
+  possibleConditions: String!
+  source: String!
+  sourceLink: String
+  severityLevel: String!
+  recommendedAction: String!
 }
 
 type Mutation {
   createSymptom(input: SymptomInput!): Symptom!
   consultant(input: String!): String!
+  seedSymptomsFromVN: String!
+  seedSymptomsFromEN: String!
 }
 
 input SymptomInput {

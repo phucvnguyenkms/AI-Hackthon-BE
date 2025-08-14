@@ -6,6 +6,7 @@ import { join } from 'path';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { SeverityModule } from './severity/severity.module';
 import { SymptomModule } from './symptom/symptom.module';
+import { SeedModule } from './data-seed/seed.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { SymptomModule } from './symptom/symptom.module';
     }),
     SeverityModule,
     SymptomModule,
+    SeedModule,
   ],
 })
 
